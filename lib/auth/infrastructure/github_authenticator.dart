@@ -10,6 +10,7 @@ import 'package:repoviewer/auth/infrastructure/credentials_storage/credentials_s
 import 'package:http/http.dart';
 
 import '../../core/shared/encoders.dart';
+import 'pacakge:repoviewer/core/infrastracture/dio_extension.dart';
 
 class GithubOAuthHttpClient extends http.BaseClient {
   final HttpClient = http.Client();
@@ -101,8 +102,9 @@ class GithubAuthenticator {
           ),
           );
       } on DioError catch(e) {
-        if (e.type == DioErrorType.other e.error is SocketException){
-          print('Token not revoked');
+        if (e.isNoConnectionError){
+          //ignoring
+          //print('Token not revoked');
         } else {
           rethrow;
         }
@@ -116,3 +118,4 @@ class GithubAuthenticator {
 
   }
 }
+
