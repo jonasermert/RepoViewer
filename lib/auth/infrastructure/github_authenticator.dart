@@ -90,15 +90,24 @@ class GithubAuthenticator {
     final usernameAndPassword = stringToBase64.encode('$clientId:$clientSecret');
 
     try {
-      _dio.deleteUri(revocationEndpoint, data: {
-        'access_token': accessToken,
-      },
-      options: Options(
-        headers: {
-            'Authorization': 'basic $clientId:$clientSecret';
+      try {
+          _dio.deleteUri(revocationEndpoint, data: {
+          'access_token': accessToken,
+          },
+          options: Options(
+            headers: {
+                'Authorization': 'basic $usernameAndPassword',
+            },
+          ),
+          );
+      } on DioError catch(e) {
+        if (e.type == DioErrorType.other e.error is SocketException){
+          print('Token not revoked');
+        } else {
+          rethrow;
         }
-      )
-      );
+        
+      }
       await _credentialsStorage.clear();
       return right(unit);
     } on PlatformException {
