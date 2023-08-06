@@ -24,10 +24,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
 
     Future<void> signIn(AuthUriCallback authorizationCallback) async {
-        final grabt = authenticator.createGrant();
+        final grant = authenticator.createGrant();
         final redirectUrl = await authorizationCallback(_authenticator.getAuthorizationUrl(grant));
         final failureOrSuccess = await _authenticator.handleAuthorizationResponse(grant, redirectUrl.queryParameters, );
         state = failureOrSuccess.fold((l) => AuthState.failure(l), (r) = AuthState.authenticated(),);
         grant.close();
+    }
+
+    Future<void> signOut() async {
+        final failureOrSuccess = await _authenticator.signOut();
+        state = failureOrSuccess.fold((l) => AuthState.failure(l), (r) = AuthState.unauthenticated(),);
+        
     }
 }
