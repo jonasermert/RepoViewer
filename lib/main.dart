@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:repoviewer/core/presentation/app_widget.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ProviderScope(child: AppWidget(),),);
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'RepoViewer',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('RepoViewer App Bar'),
-          ),
-          body: Center(
-            child: Container(child: Text('Hallo Jonas')),
-          )),
-    );
-  }
-}
+
