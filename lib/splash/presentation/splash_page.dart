@@ -3,9 +3,18 @@ import 'package:flutter/material.dart';
 class SplashPage extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
-        return Container (
-            
-        );
+        return Scaffold (body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 48),
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+                Icon(
+                   MdiIcons.github,
+                   size: 150, 
+                )
+                SizedBox(height: 16),
+                LinearProgressIndicator();
+            ]));
     }
 
 

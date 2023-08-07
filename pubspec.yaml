@@ -20,6 +20,7 @@ dependencies:
   webview_flutter: ^4.2.1
   flash: ^3.0.5
   auto_route: ^7.2.0
+  material_design_icons_flutter: 7.0.7296
 
 
 dev_dependencies:
