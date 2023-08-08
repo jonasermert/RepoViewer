@@ -6,6 +6,7 @@ import 'package:repoviewer/starred_repos/presentation/starred_repos.page.dart';
 @MaterialAutoRouter(routes:[
     MaterialRoute(page: SplashPage, initial: true),
     MaterialRoute(page: SignInPage, path: '/sign-in'),
+    MaterialRoute(page: AuthorizationPage, path: '/auth')
     MaterialRoute(page: StarredResposPage, path: '/starred'),
 ],
 replaceInRouteName: 'Page,Route',

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends ConsumerWidget {
     const SignInPage({Key? key}) : super(key: key);
 
     @override
-    Widget build(BuildContext context) {
+    Widget build(BuildContext context, WidgetReference ref) {
         return Scaffold (
             body: SafeArea(
                 child: Center(
@@ -23,11 +23,17 @@ class SignInPage extends StatelessWidget {
                             Text('Welcome to Repo Viewer', style: Theme.of(context).textTheme.headline3, textAlign: TextAlign.center
                             ),
                             const SizeBox(height: 32),
-                            ElevatedButton(onPressed: () {},
+                            ElevatedButton(onPressed: () {
+                                context.read(authNotifierProvider.notifier).signIn(authorizationUrl) {
+                                    AutoRouter.of(context.push(AuthorizationRoute(),
+                                    );
+                                });
+                            },
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(Colors.green),
                             ),
-                            child: text('Sign In'))
+                            child: text('Sign In'),
+                            ),
                         ]
                     )
                     )
