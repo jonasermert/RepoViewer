@@ -18,6 +18,24 @@ class AppWiget extends StatelessWidget {
     return ProviderListener(
         provider: initializationProvider,
         onChange: (context, value) {},
+        child: ProviderListener<AuthState>(
+          provider:authNotifierProvider,
+          onChange: (context, state) {
+            state.maybeMap(orElse: () {},
+            authenticated(_){
+              // AutoRouter.of(context)
+              appRouter.pushAndPopUntil(const StarredReposRoute(), predicate: (route) => false, 
+              );
+            },
+            unauthenticated: (_) {
+              appRouter.pushAndPopUntil(
+                const SignInRoute();
+                predicate: (route) => false,
+              );
+            }
+            );
+          },
+        )
         child: MaterialApp.router(
         title: 'RepoViewer',
         routerDelegate: appRouter.delegate() ,
