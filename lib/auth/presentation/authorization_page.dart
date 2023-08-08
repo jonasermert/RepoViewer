@@ -15,6 +15,13 @@ class AuthorizationPage extends StatefulWidget {
 class _AuthorizationPageState extends State<AuthorizationPage> {
     @override
     Widget build(BuildContext context) {
-        return Container();
+        return Scaffold(
+            body: SafeArea(
+                child: WebView(
+                    javascriptMode: JavaScriptMode.unrestricted,
+                    initialUrl: widget.authorationUrl.toString(),
+                ),
+            ),
+        );
     }
 }
