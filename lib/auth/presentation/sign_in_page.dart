@@ -25,8 +25,14 @@ class SignInPage extends ConsumerWidget {
                             const SizeBox(height: 32),
                             ElevatedButton(onPressed: () {
                                 context.read(authNotifierProvider.notifier).signIn(authorizationUrl) {
-                                    AutoRouter.of(context.push(AuthorizationRoute(),
+                                    final completer = Completer<Uri>();
+                                    AutoRouter.of(context.push(AuthorizationRoute(
+                                        authorizationUrl: authorizationUrl, onAuthorizationCodeRediectAttempt: (redirectUrl){
+                                            completer.complete(redirectUrl);
+                                        },
+                                    ),
                                     );
+                                    return completer.future;
                                 });
                             },
                             style: ButtonStyle(
