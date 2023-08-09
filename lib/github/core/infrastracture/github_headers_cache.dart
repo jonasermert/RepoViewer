@@ -1,5 +1,3 @@
-import 'package:repoviewer/core/infrastructure/sembast_database.dart';
-import 'package:repoviewer/github/core/infrastructure/github_headers.dart';
 import 'package:sembast/sembast.dart';
 
 import '../../../core/infrastracture/sembast_database.dart';
