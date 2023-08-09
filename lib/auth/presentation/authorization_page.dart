@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:repoviewer/auth/infrastructure/github_authenticator.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class AuthorizationPage extends StatefulWidget {
     
@@ -19,7 +21,18 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
             body: SafeArea(
                 child: WebView(
                     javascriptMode: JavaScriptMode.unrestricted,
-                    initialUrl: widget.authorationUrl.toString(),
+                    initialUrl: widget.authorizationUrl.toString(),
+                    onWebViewCreated:(controller){
+                      controller.clearCache();
+                      CookieManager().clearCookie();
+                    },
+                    navigationDelegate: (navReq) {
+                      if(navReq.url.startsWith(GithubAuthenticator.redirectUrl.toString())){
+                        widget.onAuthorizationCodeRediectAttempt(navReq.url);
+                        return NavigationDecision.prevent;
+                      }
+                      return NavigationDecision.navigate;
+                    }
                 ),
             ),
         );
